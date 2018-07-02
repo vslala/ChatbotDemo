@@ -5,16 +5,16 @@ import java.util.Map;
 
 import com.bma.chatbot.app.contracts.RichMessage;
 import com.bma.chatbot.app.enums.Platform;
-import com.bma.chatbot.app.richmessages.BasicCard;
-import com.bma.chatbot.app.richmessages.Card;
-import com.bma.chatbot.app.richmessages.CarouselSelect;
-import com.bma.chatbot.app.richmessages.Image;
-import com.bma.chatbot.app.richmessages.LinkOutSuggestion;
-import com.bma.chatbot.app.richmessages.ListSelect;
-import com.bma.chatbot.app.richmessages.QuickReplies;
-import com.bma.chatbot.app.richmessages.SimpleResponses;
-import com.bma.chatbot.app.richmessages.Suggestion;
-import com.bma.chatbot.app.richmessages.Text;
+import com.bma.chatbot.app.richmessages.common.BasicCard;
+import com.bma.chatbot.app.richmessages.common.Card;
+import com.bma.chatbot.app.richmessages.common.CarouselSelect;
+import com.bma.chatbot.app.richmessages.common.Image;
+import com.bma.chatbot.app.richmessages.common.LinkOutSuggestion;
+import com.bma.chatbot.app.richmessages.common.ListSelect;
+import com.bma.chatbot.app.richmessages.common.QuickReplies;
+import com.bma.chatbot.app.richmessages.common.SimpleResponses;
+import com.bma.chatbot.app.richmessages.common.Suggestion;
+import com.bma.chatbot.app.richmessages.common.Text;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

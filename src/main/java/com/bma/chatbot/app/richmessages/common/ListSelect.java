@@ -1,4 +1,4 @@
-package com.bma.chatbot.app.richmessages;
+package com.bma.chatbot.app.richmessages.common;
 
 import java.util.List;
 

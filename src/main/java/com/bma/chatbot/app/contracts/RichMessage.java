@@ -7,4 +7,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 public interface RichMessage {
 	@JsonIgnore
 	public String getName();
+	
 }

@@ -1,15 +1,15 @@
-package com.bma.chatbot.app.richmessages;
+package com.bma.chatbot.app.richmessages.common;
 
 import com.bma.chatbot.app.contracts.RichMessage;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Suggestion implements RichMessage {
+	@JsonProperty
 	private String title;
+	
+	public Suggestion() {}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
+	public Suggestion(String title) {
 		this.title = title;
 	}
 

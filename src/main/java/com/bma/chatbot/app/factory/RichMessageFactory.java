@@ -2,20 +2,33 @@ package com.bma.chatbot.app.factory;
 
 import com.bma.chatbot.app.contracts.RichMessage;
 import com.bma.chatbot.app.enums.RichMessageType;
-import com.bma.chatbot.app.richmessages.BasicCard;
-import com.bma.chatbot.app.richmessages.Card;
-import com.bma.chatbot.app.richmessages.CarouselSelect;
-import com.bma.chatbot.app.richmessages.Image;
-import com.bma.chatbot.app.richmessages.LinkOutSuggestion;
-import com.bma.chatbot.app.richmessages.ListSelect;
-import com.bma.chatbot.app.richmessages.QuickReplies;
-import com.bma.chatbot.app.richmessages.SimpleResponse;
-import com.bma.chatbot.app.richmessages.SimpleResponses;
-import com.bma.chatbot.app.richmessages.Suggestion;
-import com.bma.chatbot.app.richmessages.Text;
+import com.bma.chatbot.app.richmessages.common.BasicCard;
+import com.bma.chatbot.app.richmessages.common.Card;
+import com.bma.chatbot.app.richmessages.common.CarouselSelect;
+import com.bma.chatbot.app.richmessages.common.Image;
+import com.bma.chatbot.app.richmessages.common.LinkOutSuggestion;
+import com.bma.chatbot.app.richmessages.common.ListSelect;
+import com.bma.chatbot.app.richmessages.common.QuickReplies;
+import com.bma.chatbot.app.richmessages.common.SimpleResponse;
+import com.bma.chatbot.app.richmessages.common.SimpleResponses;
+import com.bma.chatbot.app.richmessages.common.Suggestion;
+import com.bma.chatbot.app.richmessages.common.Text;
+import com.bma.chatbot.app.richmessages.google.BasicCardGoogle;
+import com.bma.chatbot.app.richmessages.google.OpenUrlAction;
+import com.bma.chatbot.app.utils.ChatbotUtil;
 
 public class RichMessageFactory {
-
+	
+	public static com.bma.chatbot.app.richmessages.google.LinkOutSuggestion getLinkOutSuggestionForGoogle(
+			String destinationName, String url, OpenUrlAction openUrlAction
+			) {
+		return new com.bma.chatbot.app.richmessages.google.LinkOutSuggestion.Builder()
+				.destinationName(destinationName)
+				.url(url)
+				.openUrlAction(openUrlAction)
+				.build();
+	}
+	
 	public static <T> T getRichMessage(RichMessageType messageType, Class<T> classType) {
 		RichMessage richMessage = null;
 		switch (messageType) {
@@ -60,5 +73,6 @@ public class RichMessageFactory {
 		T target = classType.cast(richMessage);
 		return target;
 	}
+
 
 }

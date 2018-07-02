@@ -1,7 +1,5 @@
 package com.bma.chatbot.app.richresponses;
 
-import com.bma.chatbot.app.richmessages.RichResponse;
-
 public class GoogleRichResponse {
 	private RichResponse richResponse;
 	private boolean expectUserResponse;

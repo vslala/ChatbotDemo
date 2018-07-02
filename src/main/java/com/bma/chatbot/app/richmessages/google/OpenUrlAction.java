@@ -6,6 +6,13 @@ public class OpenUrlAction {
 	private String url;
 	private AndroidApp androidApp;
 	private UrlTypeHint urlTypeHint;
+	
+	public OpenUrlAction() {}
+	
+	public OpenUrlAction(String url) {
+		this.url = url;
+	}
+	
 	public String getUrl() {
 		return url;
 	}

@@ -15,15 +15,17 @@ import com.bma.chatbot.app.enums.Platform;
 import com.bma.chatbot.app.enums.RichMessageType;
 import com.bma.chatbot.app.factory.RichMessageFactory;
 import com.bma.chatbot.app.payloads.GooglePayload;
-import com.bma.chatbot.app.richmessages.BasicCard;
-import com.bma.chatbot.app.richmessages.BasicCard.Button;
-import com.bma.chatbot.app.richmessages.BasicCard.Button.OpenUriAction;
+import com.bma.chatbot.app.richmessages.common.BasicCard;
+import com.bma.chatbot.app.richmessages.common.Image;
+import com.bma.chatbot.app.richmessages.common.SimpleResponse;
+import com.bma.chatbot.app.richmessages.common.SimpleResponses;
+import com.bma.chatbot.app.richmessages.common.Suggestion;
+import com.bma.chatbot.app.richmessages.common.BasicCard.Button;
+import com.bma.chatbot.app.richmessages.common.BasicCard.Button.OpenUriAction;
 import com.bma.chatbot.app.richmessages.google.BasicCardGoogle;
-import com.bma.chatbot.app.richmessages.Image;
-import com.bma.chatbot.app.richmessages.RichResponse;
-import com.bma.chatbot.app.richmessages.SimpleResponse;
-import com.bma.chatbot.app.richmessages.SimpleResponses;
+import com.bma.chatbot.app.richmessages.google.OpenUrlAction;
 import com.bma.chatbot.app.richresponses.GoogleRichResponse;
+import com.bma.chatbot.app.richresponses.RichResponse;
 import com.bma.chatbot.app.utils.ChatbotUtil;
 import com.bma.chatbot.app.vo.Payload;
 import com.bma.chatbot.app.vo.Quotes;
@@ -61,7 +63,6 @@ public class GreetingCardIntent implements Intent {
 			webhookResponse.setFulfillmentText(speech);
 			
 			List<Message> fulfillmentMessages = buildFulfillmentMessages(speech);
-			
 			Map<String, Object> payload = buildPayload(speech);
 			
 			webhookResponse.setFulfillmentMessages(fulfillmentMessages);
@@ -86,6 +87,11 @@ public class GreetingCardIntent implements Intent {
 		RichResponse richResponse = new RichResponse();
 		richResponse.addItem(buildSimpleResponse(speech));
 		richResponse.addItem(buildGoogleBasicCard(speech));
+		richResponse.addSuggestion(new Suggestion("Tell me a joke"));
+		richResponse.addLinkOutSuggestion((RichMessageFactory.getLinkOutSuggestionForGoogle(
+				"Google", 
+				"https://www.google.com", 
+				new OpenUrlAction("https://www.google.com"))));
 		
 		GooglePayload googlePayload = new GooglePayload();
 		googlePayload.setExpectUserResponse(true);

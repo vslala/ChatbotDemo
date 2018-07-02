@@ -1,6 +1,6 @@
 package com.bma.chatbot.app.payloads;
 
-import com.bma.chatbot.app.richmessages.RichResponse;
+import com.bma.chatbot.app.richresponses.RichResponse;
 
 public class GooglePayload {
 	private boolean expectUserResponse;

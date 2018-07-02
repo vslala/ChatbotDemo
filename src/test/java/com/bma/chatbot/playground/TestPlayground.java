@@ -8,8 +8,8 @@ import org.junit.Test;
 import com.bma.chatbot.app.contracts.RichMessage;
 import com.bma.chatbot.app.enums.RichMessageType;
 import com.bma.chatbot.app.factory.RichMessageFactory;
-import com.bma.chatbot.app.richmessages.LinkOutSuggestion;
-import com.bma.chatbot.app.richmessages.SimpleResponse;
+import com.bma.chatbot.app.richmessages.common.LinkOutSuggestion;
+import com.bma.chatbot.app.richmessages.common.SimpleResponse;
 import com.bma.chatbot.app.utils.ChatbotUtil;
 
 public class TestPlayground {
