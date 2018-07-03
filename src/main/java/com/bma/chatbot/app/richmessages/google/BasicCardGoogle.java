@@ -54,6 +54,11 @@ public class BasicCardGoogle implements RichMessage {
 			return this;
 		}
 		
+		public Builder addButtons(List<Button> buttons) {
+			this.buttons.addAll(buttons);
+			return this;
+		}
+		
 		public BasicCardGoogle build() {
 			return new BasicCardGoogle(this);
 		}

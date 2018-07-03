@@ -1,11 +1,20 @@
 package com.bma.chatbot.app.richmessages.common;
 
 import com.bma.chatbot.app.contracts.RichMessage;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Image implements RichMessage {
+	@JsonProperty
 	private String imageUri;
+	@JsonProperty
 	private String accessibilityText;
+	
+	public Image() {}
+	
+	public Image(String imageUri, String accessibilityText) {
+		this.imageUri = imageUri;
+		this.accessibilityText = accessibilityText;
+	}
 	
 	public String getImageUri() {
 		return imageUri;

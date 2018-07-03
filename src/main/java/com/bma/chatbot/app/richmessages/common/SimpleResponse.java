@@ -1,11 +1,21 @@
 package com.bma.chatbot.app.richmessages.common;
 
 import com.bma.chatbot.app.contracts.RichMessage;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SimpleResponse implements RichMessage {
+	@JsonProperty
 	private String textToSpeech;
+	@JsonProperty
 	private String ssml;
+	@JsonProperty
 	private String displayText;
+	
+	public SimpleResponse(String textToSpeech, String ssml, String displaytext) {
+		this.textToSpeech = textToSpeech;
+		this.ssml = ssml;
+		this.displayText = displaytext;
+	}
 
 	public String getTextToSpeech() {
 		return textToSpeech;

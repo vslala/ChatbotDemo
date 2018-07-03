@@ -13,21 +13,18 @@ import com.bma.chatbot.app.contracts.Intent;
 import com.bma.chatbot.app.contracts.RichMessage;
 import com.bma.chatbot.app.enums.Platform;
 import com.bma.chatbot.app.enums.RichMessageType;
+import com.bma.chatbot.app.factory.CommonMessageFactory;
+import com.bma.chatbot.app.factory.GoogleMessageFactory;
 import com.bma.chatbot.app.factory.RichMessageFactory;
 import com.bma.chatbot.app.payloads.GooglePayload;
 import com.bma.chatbot.app.richmessages.common.BasicCard;
 import com.bma.chatbot.app.richmessages.common.Image;
 import com.bma.chatbot.app.richmessages.common.SimpleResponse;
-import com.bma.chatbot.app.richmessages.common.SimpleResponses;
 import com.bma.chatbot.app.richmessages.common.Suggestion;
-import com.bma.chatbot.app.richmessages.common.BasicCard.Button;
-import com.bma.chatbot.app.richmessages.common.BasicCard.Button.OpenUriAction;
 import com.bma.chatbot.app.richmessages.google.BasicCardGoogle;
 import com.bma.chatbot.app.richmessages.google.OpenUrlAction;
-import com.bma.chatbot.app.richresponses.GoogleRichResponse;
 import com.bma.chatbot.app.richresponses.RichResponse;
 import com.bma.chatbot.app.utils.ChatbotUtil;
-import com.bma.chatbot.app.vo.Payload;
 import com.bma.chatbot.app.vo.Quotes;
 import com.bma.chatbot.app.vo.WebhookRequestVO;
 import com.bma.chatbot.app.vo.WebhookResponseVO;
@@ -76,7 +73,6 @@ public class GreetingCardIntent implements Intent {
 		List<Message> fulfillmentMessages = new ArrayList<>();
 		Message message = new WebhookSharedVO().new Message();
 		message.setBasicCard(buildBasicCard(speech));
-//		message.setPlatform(Platform.ACTIONS_ON_GOOGLE);
 		fulfillmentMessages.add(message );
 		return fulfillmentMessages;
 	}
@@ -88,7 +84,7 @@ public class GreetingCardIntent implements Intent {
 		richResponse.addItem(buildSimpleResponse(speech));
 		richResponse.addItem(buildGoogleBasicCard(speech));
 		richResponse.addSuggestion(new Suggestion("Tell me a joke"));
-		richResponse.addLinkOutSuggestion((RichMessageFactory.getLinkOutSuggestionForGoogle(
+		richResponse.addLinkOutSuggestion((GoogleMessageFactory.createLinkOutSuggestion(
 				"Google", 
 				"https://www.google.com", 
 				new OpenUrlAction("https://www.google.com"))));
@@ -96,54 +92,47 @@ public class GreetingCardIntent implements Intent {
 		GooglePayload googlePayload = new GooglePayload();
 		googlePayload.setExpectUserResponse(true);
 		googlePayload.setRichResponse(richResponse);
-		payload.put(Platform.lowerCase(Platform.GOOGLE), googlePayload);
+		payload.put(googlePayload.getPlatformName(), googlePayload);
 		return payload;
 	}
 
 	private RichMessage buildGoogleBasicCard(String speech) {
-		BasicCardGoogle basicCard = new BasicCardGoogle.Builder()
-				.title("Greeting Card")
-				.subtitle("Quote of the Day")
-				.formattedText(speech)
-				.image(new com.bma.chatbot.app.richmessages.google.Image(
+		return GoogleMessageFactory.createBasicCard(
+				"Greeting Card",
+				"Quote of the Day",
+				speech,
+				GoogleMessageFactory.createImage(
 						"https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg",
 						speech,
 						200,
-						300))
-				.addButton(new com.bma.chatbot.app.richmessages.google.Button.Builder()
-						.title("Greeting!")
-						.url("https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg")
-						.build()
+						300
+						),
+				GoogleMessageFactory.createButton(
+						"Greeting!",
+						"https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg"
 						)
-				.build();
-		return basicCard;
+				); 
 	}
 
 	private BasicCard buildBasicCard(String speech) {
-		BasicCard basicCard = RichMessageFactory.getRichMessage(RichMessageType.BASIC_CARD, BasicCard.class);
-		basicCard.setTitle("Greeting Card");
-		basicCard.setSubtitle(speech);
-		basicCard.setFormattedText(speech);
-		Image image = new Image();
-		image.setAccessibilityText("DZone Logo");
-		image.setImageUri("https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg");
-		basicCard.setImage(image);
-		List<Button> buttons = new ArrayList<>();
-		Button button = basicCard.new Button();
-		OpenUriAction uri = button.new OpenUriAction();
-		uri.setUri("https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg");
-		button.setOpenUriAction(uri);
-		button.setTitle("Greeting Card Link");
-		buttons.add(button);
-		basicCard.setButtons(buttons);
+		BasicCard basicCard = CommonMessageFactory.createBasicCard(
+				"Greeting Card",
+				speech,
+				speech,
+				CommonMessageFactory.createImage(
+						"DZone Logo", 
+						"https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg"),
+				CommonMessageFactory.createButton(
+						"Greeting Card Link",
+						"https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg")
+				);
 		return basicCard;
 	}
 
 	private SimpleResponse buildSimpleResponse(String speech) {
-		SimpleResponse simpleResponse = RichMessageFactory.getRichMessage(RichMessageType.SIMPLE_RESPONSE, SimpleResponse.class);
-		simpleResponse.setDisplayText(speech);
-		simpleResponse.setSsml("<speak>" + speech + "</speak>");
-		return simpleResponse;
+		return CommonMessageFactory.createSimpleResponseWithSSML(
+				"<speak>" + speech + "</speak>", 
+				speech);
 	}
 
 }
