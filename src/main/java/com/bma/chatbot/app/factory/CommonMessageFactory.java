@@ -1,7 +1,5 @@
 package com.bma.chatbot.app.factory;
 
-import java.util.Arrays;
-
 import com.bma.chatbot.app.richmessages.common.BasicCard;
 import com.bma.chatbot.app.richmessages.common.Button;
 import com.bma.chatbot.app.richmessages.common.Image;
@@ -24,7 +22,7 @@ public class CommonMessageFactory {
 				.subtitle(speech)
 				.formattedText(speech2)
 				.image(image)
-				.addButtons(Arrays.asList(buttons))
+				.addButtons(buttons)
 				.build();
 	}
 	

@@ -8,6 +8,7 @@ import com.bma.chatbot.app.richmessages.google.Image;
 import com.bma.chatbot.app.richmessages.google.LinkOutSuggestion;
 import com.bma.chatbot.app.richmessages.google.OpenUrlAction;
 
+
 public class GoogleMessageFactory extends RichMessageFactory {
 	
 	public static BasicCardGoogle createBasicCard(String title, String subtitle, String formattedText, Image image, Button... buttons) {

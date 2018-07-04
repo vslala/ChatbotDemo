@@ -73,7 +73,7 @@ public class GreetingCardIntent implements Intent {
 		List<Message> fulfillmentMessages = new ArrayList<>();
 		Message message = new WebhookSharedVO().new Message();
 		message.setBasicCard(buildBasicCard(speech));
-		fulfillmentMessages.add(message );
+		fulfillmentMessages.add(message);
 		return fulfillmentMessages;
 	}
 

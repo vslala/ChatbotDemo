@@ -1,6 +1,7 @@
 package com.bma.chatbot.app.richmessages.common;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.bma.chatbot.app.contracts.RichMessage;
@@ -54,8 +55,8 @@ public class BasicCard implements RichMessage {
 			return this;
 		}
 		
-		public Builder addButtons(List<Button> buttons) {
-			buttons.addAll(buttons);
+		public Builder addButtons(Button... buttons) {
+			this.buttons.addAll(new ArrayList<Button>(Arrays.asList(buttons)));
 			return this;
 		}
 		
